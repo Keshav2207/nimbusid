@@ -1,0 +1,31 @@
+#debug: true
+spring:
+  application:
+    name: NimbusID
+
+  # @see: docker/docker-compose.yml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/nimbusid
+    username: nimbusid
+    password: nimbusid
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: INFO
+    org.flywaydb: DEBUG
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui
