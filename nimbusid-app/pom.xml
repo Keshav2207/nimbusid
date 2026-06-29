@@ -27,6 +27,11 @@
         </dependency>
         <dependency>
             <groupId>com.nimbusid</groupId>
+            <artifactId>nimbusid-auth</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.nimbusid</groupId>
             <artifactId>nimbusid-user</artifactId>
             <version>${project.version}</version>
         </dependency>

@@ -1,4 +1,12 @@
 #debug: true
+
+nimbusid:
+  jwt:
+    issuer: NimbusID
+    secret: ChangeThisToA256BitSecretKeyForDevelopmentOnly123456789
+    access-token-validity: 15m
+    refresh-token-validity: 7d
+
 spring:
   application:
     name: NimbusID

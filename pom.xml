@@ -25,6 +25,7 @@
         <module>nimbusid-platform</module>
         <module>nimbusid-security</module>
         <module>nimbusid-user</module>
+        <module>nimbusid-auth</module>
         <module>nimbusid-app</module>
     </modules>
 

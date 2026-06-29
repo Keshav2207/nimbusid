@@ -48,11 +48,11 @@ public class UserService {
         );
     }
 
-    public Optional<User> findById(UUID id) {
+    public Optional<User> findUserById(UUID id) {
         return userRepository.findById(id);
     }
 
-    public Optional<User> findByEmail(String email) {
+    public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
