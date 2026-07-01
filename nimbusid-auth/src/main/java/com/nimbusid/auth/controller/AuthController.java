@@ -2,6 +2,7 @@ package com.nimbusid.auth.controller;
 
 import com.nimbusid.auth.dto.LoginRequest;
 import com.nimbusid.auth.dto.LoginResponse;
+import com.nimbusid.auth.dto.RefreshRequest;
 import com.nimbusid.auth.service.AuthService;
 import com.nimbusid.platform.factory.ResponseFactory;
 import com.nimbusid.platform.response.ApiResponse;
@@ -24,12 +25,19 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ApiResponse<LoginResponse> login(
-            @RequestBody LoginRequest request) {
+    public ApiResponse<LoginResponse> login(@RequestBody LoginRequest request) {
+        return responseFactory.ok(authService.login(request));
+    }
 
-        LoginResponse response = authService.login(request);
+    @PostMapping("/refresh")
+    public ApiResponse<LoginResponse> refresh(@RequestBody RefreshRequest request) {
+        return responseFactory.ok(authService.refresh(request));
+    }
 
-        return responseFactory.ok(response);
+    @PostMapping("/logout")
+    public ApiResponse<Void> logout(@RequestBody RefreshRequest request) {
+        authService.logout(request);
+        return responseFactory.ok(null);
     }
 
     @GetMapping("/me")

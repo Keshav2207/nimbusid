@@ -15,7 +15,7 @@ NimbusID uses UUIDs as primary keys instead of auto-incrementing `long` or `int`
 
 An Identity & Access Management system frequently operates across multiple services, databases, and clients.
 
-UUIDs provide globally unique identifiers without requiring a centralized ID generator.
+UUIDs provide globally unique identifiers without requiring a centralized ID refreshTokenGenerator.
 
 This aligns well with distributed system design and modern authentication architectures.
 

@@ -77,10 +77,6 @@ public class JwtTokenService {
         return generateToken(user, properties.getAccessTokenValidity());
     }
 
-    public String generateRefreshToken(User user) {
-        return generateToken(user, properties.getRefreshTokenValidity());
-    }
-
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(
                 properties.getSecret().getBytes(StandardCharsets.UTF_8)
