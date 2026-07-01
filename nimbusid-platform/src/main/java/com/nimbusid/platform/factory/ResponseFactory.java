@@ -1,12 +1,11 @@
 package com.nimbusid.platform.factory;
 
-import com.nimbusid.platform.response.ApiError;
-import com.nimbusid.platform.response.ApiErrorResponse;
-import com.nimbusid.platform.response.ApiMetadata;
-import com.nimbusid.platform.response.ApiResponse;
+
+import com.nimbusid.platform.response.*;
 
 import java.time.Clock;
 import java.time.Instant;
+import java.util.List;
 
 /**
  * Factory responsible for creating standardized API responses.
@@ -55,6 +54,22 @@ public class ResponseFactory {
      */
     public ApiErrorResponse error(ApiError error) {
         return new ApiErrorResponse(error, createMetadata());
+    }
+
+    // Method overloading.
+    public ApiErrorResponse error(ApiErrorCode errorCode, String message) {
+        ApiError error = new ApiError();
+        error.setCode(errorCode.getCode());
+        error.setMessage(message);
+        return error(error);
+    }
+
+    public ApiErrorResponse error(ApiErrorCode errorCode, String message, List<ValidationError> validationErrors) {
+        ApiError error = new ApiError();
+        error.setCode(errorCode.getCode());
+        error.setMessage(message);
+        error.setValidationErrors(validationErrors);
+        return error(error);
     }
 
     /**

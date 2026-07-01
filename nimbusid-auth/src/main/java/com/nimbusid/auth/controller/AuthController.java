@@ -8,6 +8,7 @@ import com.nimbusid.platform.factory.ResponseFactory;
 import com.nimbusid.platform.response.ApiResponse;
 import com.nimbusid.user.dto.MeResponse;
 import com.nimbusid.user.entity.User;
+import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,17 +26,17 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ApiResponse<LoginResponse> login(@RequestBody LoginRequest request) {
+    public ApiResponse<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
         return responseFactory.ok(authService.login(request));
     }
 
     @PostMapping("/refresh")
-    public ApiResponse<LoginResponse> refresh(@RequestBody RefreshRequest request) {
+    public ApiResponse<LoginResponse> refresh(@Valid @RequestBody RefreshRequest request) {
         return responseFactory.ok(authService.refresh(request));
     }
 
     @PostMapping("/logout")
-    public ApiResponse<Void> logout(@RequestBody RefreshRequest request) {
+    public ApiResponse<Void> logout(@Valid @RequestBody RefreshRequest request) {
         authService.logout(request);
         return responseFactory.ok(null);
     }

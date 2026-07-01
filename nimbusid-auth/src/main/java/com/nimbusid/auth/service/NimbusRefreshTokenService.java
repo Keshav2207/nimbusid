@@ -1,6 +1,9 @@
 package com.nimbusid.auth.service;
 
 import com.nimbusid.auth.entity.RefreshToken;
+import com.nimbusid.auth.exception.ExpiredRefreshTokenException;
+import com.nimbusid.auth.exception.InvalidRefreshTokenException;
+import com.nimbusid.auth.exception.RevokedRefreshTokenException;
 import com.nimbusid.auth.refresh.RefreshTokenGenerator;
 import com.nimbusid.auth.refresh.RefreshTokenHasher;
 import com.nimbusid.auth.repository.RefreshTokenRepository;
@@ -68,18 +71,16 @@ public class NimbusRefreshTokenService implements RefreshTokenService {
 
         String tokenHash = tokenHasher.hash(refreshToken);
         RefreshToken token = repository.findByTokenHash(tokenHash)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("Invalid refresh token.")
-                );
+                .orElseThrow(InvalidRefreshTokenException::new);
         Instant now = Instant.now(clock);
 
         if (token.getRevokedAt() != null) {
-            throw new IllegalArgumentException("Refresh token has been revoked.");
+            throw new RevokedRefreshTokenException();
         }
 
         // understand why token.getExpiresAt().isBefore(now) is not used here..
         if (!token.getExpiresAt().isAfter(now)) {
-            throw new IllegalArgumentException("Refresh token has expired.");
+            throw new ExpiredRefreshTokenException();
         }
 
         return token;
