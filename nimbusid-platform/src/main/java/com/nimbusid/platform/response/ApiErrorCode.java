@@ -2,6 +2,8 @@ package com.nimbusid.platform.response;
 
 public enum ApiErrorCode {
 
+    EMAIL_ALREADY_EXISTS("EMAIL_ALREADY_EXISTS"),
+
     INVALID_CREDENTIAL("INVALID_CREDENTIAL"),
     ACCOUNT_DISABLED("ACCOUNT_DISABLED"),
 

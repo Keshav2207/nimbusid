@@ -13,6 +13,19 @@
         <relativePath/>
     </parent>
 
+    <!-- Fix "./mvnw test" command timezone issue   -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>-Duser.timezone=UTC</argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <groupId>com.nimbusid</groupId>
     <artifactId>nimbusid</artifactId>
     <version>0.0.1-SNAPSHOT</version>

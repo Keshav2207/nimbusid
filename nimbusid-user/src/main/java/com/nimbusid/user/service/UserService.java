@@ -3,6 +3,7 @@ package com.nimbusid.user.service;
 import com.nimbusid.user.dto.RegisterUserRequest;
 import com.nimbusid.user.dto.UserResponse;
 import com.nimbusid.user.entity.User;
+import com.nimbusid.user.exception.EmailAlreadyExistsException;
 import com.nimbusid.user.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class UserService {
     public UserResponse registerUser(RegisterUserRequest request) {
 
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new IllegalArgumentException("Email already exists.");
+            throw new EmailAlreadyExistsException(request.getEmail());
         }
 
         Instant now = Instant.now(clock);

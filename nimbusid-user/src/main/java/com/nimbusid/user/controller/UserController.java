@@ -7,6 +7,7 @@ import com.nimbusid.user.dto.RegisterUserRequest;
 import com.nimbusid.user.dto.UserResponse;
 import com.nimbusid.user.entity.User;
 import com.nimbusid.user.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,7 +26,7 @@ public class UserController {
 
     @PostMapping
     public ApiResponse<UserResponse> registerUser(
-            @RequestBody RegisterUserRequest request) {
+            @Valid @RequestBody RegisterUserRequest request) {
 
         UserResponse response = userService.registerUser(request);
 

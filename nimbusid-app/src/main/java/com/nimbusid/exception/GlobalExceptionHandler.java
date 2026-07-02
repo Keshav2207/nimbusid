@@ -5,6 +5,7 @@ import com.nimbusid.platform.factory.ResponseFactory;
 import com.nimbusid.platform.response.ApiErrorCode;
 import com.nimbusid.platform.response.ApiErrorResponse;
 import com.nimbusid.platform.response.ValidationError;
+import com.nimbusid.user.exception.EmailAlreadyExistsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,17 @@ public class GlobalExceptionHandler {
 
     public GlobalExceptionHandler(ResponseFactory responseFactory) {
         this.responseFactory = responseFactory;
+    }
+
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<ApiErrorResponse> handleEmailAlreadyExists(
+            EmailAlreadyExistsException ex) {
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(responseFactory.error(
+                        ApiErrorCode.EMAIL_ALREADY_EXISTS,
+                        ex.getMessage()
+                ));
     }
 
     @ExceptionHandler(InvalidCredentialsException.class)
